@@ -84,7 +84,7 @@ func applyGenerate(p *plugin.Plugin, host string, basePath string) (*swaggerObje
 	newSecDefValue.In = "header"
 	s.SecurityDefinitions["apiKey"] = newSecDefValue
 
-	//s.Security = append(s.Security, swaggerSecurityRequirementObject{"apiKey": []string{}})
+	// s.Security = append(s.Security, swaggerSecurityRequirementObject{"apiKey": []string{}})
 
 	requestResponseRefs := refMap{}
 	renderServiceRoutes(p.Api.Service, p.Api.Service.Groups, s.Paths, requestResponseRefs)
@@ -281,8 +281,17 @@ func renderServiceRoutes(service spec.Service, groups []spec.Group, paths swagge
 			}
 
 			// set OperationID
-			operationObject.OperationID = route.Handler
+			operationObject.OperationID = route.Method
+			pathWords := strings.Split(path, "/")
+			for _, path := range pathWords {
+				if path != "" {
+					pathLen := len(path)
+					operationObject.OperationID += strings.ToTitle(path[0:1]) + path[1:pathLen]
+					fmt.Println(operationObject.OperationID)
 
+				}
+			}
+			fmt.Println(operationObject.OperationID)
 			for _, param := range operationObject.Parameters {
 				if param.Schema != nil && param.Schema.Ref != "" {
 					requestResponseRefs[param.Schema.Ref] = struct{}{}
@@ -406,6 +415,7 @@ func hasPathParameters(member spec.Member) bool {
 
 	return false
 }
+
 func schemaOfField(member spec.Member) swaggerSchemaObject {
 	ret := swaggerSchemaObject{}
 

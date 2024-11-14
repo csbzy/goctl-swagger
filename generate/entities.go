@@ -37,6 +37,7 @@ var swaggerMapTypes = map[string]reflect.Kind{
 	"[]int32":  reflect.Slice,
 	"[]uint32": reflect.Slice,
 	"[]uint64": reflect.Slice,
+	"[]byte":   reflect.Slice,
 	"bool":     reflect.Bool,
 	"*bool":    reflect.Bool,
 	"struct":   reflect.Struct,
@@ -45,6 +46,7 @@ var swaggerMapTypes = map[string]reflect.Kind{
 	"*float32": reflect.Float32,
 	"float64":  reflect.Float64,
 	"*float64": reflect.Float64,
+	"byte":     reflect.Int8,
 }
 
 // http://swagger.io/specification/#infoObject
