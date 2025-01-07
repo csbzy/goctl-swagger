@@ -539,6 +539,8 @@ func schemaOfField(member spec.Member) swaggerSchemaObject {
 						ret.Maximum = max
 					}
 				}
+			case strings.HasPrefix(option, stringOption):
+				ret.Type = "string"
 			}
 		}
 	}
