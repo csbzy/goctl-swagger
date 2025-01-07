@@ -121,6 +121,10 @@ func addSwagParameter(m spec.Member, stype string, parameters swaggerParametersO
 				}
 			}
 
+			if strings.HasPrefix(option, stringOption) {
+				sp.Type = "string"
+				fmt.Println("has prefix string", m)
+			}
 			if strings.HasPrefix(option, rangeOption) {
 				segs := strings.SplitN(option, equalToken, 2)
 				if len(segs) == 2 {
